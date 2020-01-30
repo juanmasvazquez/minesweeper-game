@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Cell {
 
 	public enum CellStatus{
-		REVEALED, MARKED, HIDE
+		REVEALED, MARKED, HIDE;
 	}
 
 	public enum CellContentType{

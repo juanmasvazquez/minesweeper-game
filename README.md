@@ -4,23 +4,35 @@
 `POST /api/game`
 
     - Request Body: `{
-                	"columns": 8,
-                	"rows": 8,
-                	"mines": 10
+                	"columns": Number,
+                	"rows": Number,
+                	"mines": Number
                 }`
-    - Response Body: ```json
-    {
+    - Response Body: `{
                      "id": String,
-                    "columns": Number,  
-                           "rows": Number,
+                    "columns": Number,`  
+                           ` "rows": Number,
                             "mines": Number,
                             "status": String // PLAYING, PAUSED, GAME_OVER, WINNER,
                             "seconds": Number,
                             "cells": []
-                }```               
+                }`                
 
-- Create new Game
+- Get All Games
 `GET /api/game`
+
+    - Response Body: `[{
+                	 "id": String,
+                    "columns": Number,
+                            "rows": Number,
+                            "mines": Number,
+                            "status": String // PLAYING, PAUSED, GAME_OVER, WINNER,
+                            "seconds": Number,
+                            "cells": []
+                }]`
+
+- Get Game
+`GET /api/game/{gameId}`
 
     - Response Body: `{
                 	 "id": String,
@@ -31,3 +43,47 @@
                             "seconds": Number,
                             "cells": []
                 }`
+                
+- Execute Action
+`PUT /api/game/action/{gameId}`
+
+    - Request Body: `{
+                     	"column": Number,
+                     	"row": Number,
+                     	"actionType": String // Q_MARK, REVEAL
+                     }`
+    - Response Body: `{
+                	 "id": String,
+                    "columns": Number,
+                            "rows": Number,
+                            "mines": Number,
+                            "status": String // PLAYING, PAUSED, GAME_OVER, WINNER,
+                            "seconds": Number,
+                            "cells": []
+                }` 
+
+- Pause Game
+`PUT /api/game/pause/{gameId}`
+
+    - Response Body: `{
+                	 "id": String,
+                    "columns": Number,
+                            "rows": Number,
+                            "mines": Number,
+                            "status": String // PLAYING, PAUSED, GAME_OVER, WINNER,
+                            "seconds": Number,
+                            "cells": []
+                }`                
+                
+- Play Game
+`PUT /api/game/play/{gameId}`
+
+    - Response Body: `{
+                	 "id": String,
+                    "columns": Number,
+                            "rows": Number,
+                            "mines": Number,
+                            "status": String // PLAYING, PAUSED, GAME_OVER, WINNER,
+                            "seconds": Number,
+                            "cells": []
+                }`                                                               

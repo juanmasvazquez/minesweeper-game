@@ -3,10 +3,9 @@ package com.deviget.minesweepergame;
 import com.deviget.minesweepergame.dto.GameDTO;
 import com.deviget.minesweepergame.model.Cell;
 import com.deviget.minesweepergame.model.Game;
+import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 public final class GameUtils {
 
@@ -17,6 +16,7 @@ public final class GameUtils {
 	private static final String MINE_CHAR = "X";
 	private static final String BLANK_CHAR = "-";
 	private static final String HIDE_CHAR = "";
+	private static final String Q_MARK_CHAR = "?";
 
 	public static GameDTO convertGameToGameDTO(Game game) {
 		GameDTO gameDTO = GameDTO.builder()
@@ -29,8 +29,26 @@ public final class GameUtils {
 				.cells(convertCells(game.getCells()))
 				.build();
 
+		gameDTO.setPrintable(createPrintable(gameDTO));
 		printGameCells(gameDTO);
 		return gameDTO;
+	}
+
+	private static String[] createPrintable(GameDTO gameDTO) {
+		String[][] gameCells = gameDTO.getCells();
+		List<String> printLines = new ArrayList<>();
+		printLines.add("Status: " + gameDTO.getStatus());
+		printLines.add("Time: " +  gameDTO.getSeconds());
+		printLines.add("Mines: " +  gameDTO.getMines());
+		for (String[] gameCell : gameCells) {
+			StringBuilder stringBuilder = new StringBuilder();
+			for (int j = 0; j < gameCell.length; j++) {
+				String cell = gameCell[j];
+				stringBuilder.append(StringUtils.leftPad(cell, 1, " ")).append("|");
+			}
+			printLines.add(stringBuilder.toString());
+		}
+		return printLines.toArray(new String[0]);
 	}
 
 	private static int calculateTime(int seconds, Date startTime) {
@@ -57,6 +75,8 @@ public final class GameUtils {
 					} else if (cell.getCellContentType() == Cell.CellContentType.BLANK) {
 						content = BLANK_CHAR;
 					}
+				} else if (cell.getCellStatus() == Cell.CellStatus.MARKED) {
+					content = Q_MARK_CHAR;
 				}
 				gameCells[i][j] = content;
 			}

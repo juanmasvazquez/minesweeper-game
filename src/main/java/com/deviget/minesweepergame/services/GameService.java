@@ -50,7 +50,7 @@ public class GameService {
 	public GameDTO playGame(String username, String gameId) throws NotFoundException {
 		Game currentGame = gameRepository.findByUsernameAndId(username, gameId).orElseThrow(NotFoundException::new);
 		if (currentGame.getStatus() == Game.GameStatus.PAUSED) {
-			currentGame.setStatus(Game.GameStatus.PAUSED);
+			currentGame.setStatus(Game.GameStatus.PLAYING);
 			currentGame.setStartTime(new Date());
 			gameRepository.save(currentGame);
 		}
@@ -124,7 +124,7 @@ public class GameService {
 	private Game assignQuestionMarkToCell(Game currentGame, int row, int column) {
 		Cell targetCell = currentGame.getCells()[row][column];
 		if (targetCell.getCellStatus() != Cell.CellStatus.REVEALED) {
-			targetCell.setCellStatus(targetCell.getCellStatus() == Cell.CellStatus.HIDE ? Cell.CellStatus.MARKED : Cell.CellStatus.HIDE);
+			targetCell.setCellStatus(targetCell.getCellStatus() == Cell.CellStatus.MARKED ? Cell.CellStatus.HIDE : Cell.CellStatus.MARKED);
 		}
 		return currentGame;
 	}

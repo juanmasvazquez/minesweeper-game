@@ -16,4 +16,5 @@ public class GameDTO {
 	private String startedTime;
 	private int seconds;
 	private String[][] cells;
+	private String[] printable;
 }
