@@ -57,6 +57,24 @@ public class GameService {
 		return GameUtils.convertGameToGameDTO(currentGame);
 	}
 
+	public GameDTO revealCell(String username, String gameId, String row, String column) throws NotFoundException {
+		Game currentGame = gameRepository.findByUsernameAndId(username, gameId).orElseThrow(NotFoundException::new);
+		if (currentGame.getStatus() == Game.GameStatus.PLAYING) {
+			revealCell(currentGame, Integer.parseInt(row), Integer.parseInt(column));
+			gameRepository.save(currentGame);
+		}
+		return GameUtils.convertGameToGameDTO(currentGame);
+	}
+
+	public GameDTO markCell(String username, String gameId, String row, String column) throws NotFoundException {
+		Game currentGame = gameRepository.findByUsernameAndId(username, gameId).orElseThrow(NotFoundException::new);
+		if (currentGame.getStatus() == Game.GameStatus.PLAYING) {
+			assignQuestionMarkToCell(currentGame, Integer.parseInt(row), Integer.parseInt(column));
+			gameRepository.save(currentGame);
+		}
+		return GameUtils.convertGameToGameDTO(currentGame);
+	}
+
 	public GameDTO executeAction(String username, String gameId, ActionDTO actionDTO) throws NotFoundException {
 		Game currentGame = gameRepository.findByUsernameAndId(username, gameId).orElseThrow(NotFoundException::new);
 		if (currentGame.getStatus() == Game.GameStatus.PLAYING) {

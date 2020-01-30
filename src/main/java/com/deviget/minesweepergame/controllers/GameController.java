@@ -21,7 +21,7 @@ public class GameController {
 	}
 
 	@PostMapping
-	public ResponseEntity<GameDTO> createGame(@RequestHeader("username") String username, @RequestBody GameDTO game)  {
+	public ResponseEntity<GameDTO> createGame(@RequestHeader("username") String username, @RequestBody GameDTO game) {
 		GameDTO newGame = this.gameService.createGame(username, game);
 		return new ResponseEntity<>(newGame, HttpStatus.OK);
 	}
@@ -38,6 +38,23 @@ public class GameController {
 		return new ResponseEntity<>(newGame, HttpStatus.OK);
 	}
 
+	@PutMapping("/{gameId}/cell/{row}/{col}/reveal")
+	public ResponseEntity<GameDTO> revealCell(@RequestHeader("username") String username, @PathVariable("gameId") String gameId,
+											  @PathVariable("row") String row,
+											  @PathVariable("col") String col) throws NotFoundException {
+		GameDTO newGame = this.gameService.revealCell(username, gameId, row, col);
+		return new ResponseEntity<>(newGame, HttpStatus.OK);
+	}
+
+	@PutMapping("/{gameId}/cell/{row}/{col}/mark")
+	public ResponseEntity<GameDTO> markCell(@RequestHeader("username") String username, @PathVariable("gameId") String gameId,
+											@PathVariable("row") String row,
+											@PathVariable("col") String col) throws NotFoundException {
+		GameDTO newGame = this.gameService.markCell(username, gameId, row, col);
+		return new ResponseEntity<>(newGame, HttpStatus.OK);
+	}
+
+	@Deprecated
 	@PutMapping("/action/{gameId}")
 	public ResponseEntity<GameDTO> executeAction(@RequestHeader("username") String username, @PathVariable("gameId") String gameId, @RequestBody ActionDTO action) throws NotFoundException {
 		GameDTO newGame = this.gameService.executeAction(username, gameId, action);
