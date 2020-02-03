@@ -1,0 +1,361 @@
+{
+	"info": {
+		"_postman_id": "02face07-26b0-4e5b-995d-5a80a7e76c75",
+		"name": "Minesweeper",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Game",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "973a1036-3acd-4d83-9360-5028fe73d598",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"gameId\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "username",
+						"value": "juanmasvazquez",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"columns\": 8,\n\t\"rows\": 8,\n\t\"mines\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://66.97.40.56:9008/api/game",
+					"protocol": "http",
+					"host": [
+						"66",
+						"97",
+						"40",
+						"56"
+					],
+					"port": "9008",
+					"path": [
+						"api",
+						"game"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Games",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "username",
+						"value": "juanmasvazquez",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://66.97.40.56:9008/api/game",
+					"protocol": "http",
+					"host": [
+						"66",
+						"97",
+						"40",
+						"56"
+					],
+					"port": "9008",
+					"path": [
+						"api",
+						"game"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Game",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "username",
+						"value": "juanmasvazquez",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/game/{{gameId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"game",
+						"{{gameId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reveal Cell",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "username",
+						"value": "juanmasvazquez",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"column\":4,\n\t\"row\":4,\n\t\"actionType\":\"Q_MARK\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://66.97.40.56:9008/api/game/{{gameId}}/cell/3/1/reveal",
+					"protocol": "http",
+					"host": [
+						"66",
+						"97",
+						"40",
+						"56"
+					],
+					"port": "9008",
+					"path": [
+						"api",
+						"game",
+						"{{gameId}}",
+						"cell",
+						"3",
+						"1",
+						"reveal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mark Cell",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "username",
+						"value": "juanmasvazquez",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"column\":4,\n\t\"row\":4,\n\t\"actionType\":\"Q_MARK\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://66.97.40.56:9008/api/game/{{gameId}}/cell/4/5/mark",
+					"protocol": "http",
+					"host": [
+						"66",
+						"97",
+						"40",
+						"56"
+					],
+					"port": "9008",
+					"path": [
+						"api",
+						"game",
+						"{{gameId}}",
+						"cell",
+						"4",
+						"5",
+						"mark"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pause Game",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "username",
+						"type": "text",
+						"value": "juanmasvazquez"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://66.97.40.56:9008/api/game/pause/{{gameId}}",
+					"protocol": "http",
+					"host": [
+						"66",
+						"97",
+						"40",
+						"56"
+					],
+					"port": "9008",
+					"path": [
+						"api",
+						"game",
+						"pause",
+						"{{gameId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Play Game",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "username",
+						"value": "juanmasvazquez",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://66.97.40.56:9008/api/game/play/{{gameId}}",
+					"protocol": "http",
+					"host": [
+						"66",
+						"97",
+						"40",
+						"56"
+					],
+					"port": "9008",
+					"path": [
+						"api",
+						"game",
+						"play",
+						"{{gameId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ping",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "username",
+						"type": "text",
+						"value": "juanmasvazquez"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://66.97.40.56:9008/api/game/ping",
+					"protocol": "http",
+					"host": [
+						"66",
+						"97",
+						"40",
+						"56"
+					],
+					"port": "9008",
+					"path": [
+						"api",
+						"game",
+						"ping"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
