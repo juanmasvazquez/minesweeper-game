@@ -79,3 +79,9 @@ Run the App
 3 - Run the `build.sh` file
 
 4 - Navigate thru localhost:8080/api/game/ping
+
+Import Postman Collection
+-         
+
+1 - Download Postman https://www.getpostman.com/downloads/
+2 - Import "Minesweeper.postman_collection.json" file
