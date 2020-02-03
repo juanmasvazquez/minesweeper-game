@@ -69,3 +69,13 @@ NOTE: MongoDB instance is embedded, so if the server is reset all the data is go
                 
 - Headers `'username: juanmasvazquez'` simulates a token based security
                                                            
+Run the App
+-                                                           
+
+1 - Install maven http://maven.apache.org/install.html
+
+2 - Install docker https://docs.docker.com/install/
+
+3 - Run the `build.sh` file
+
+4 - Navigate thru localhost:8080/api/game/ping

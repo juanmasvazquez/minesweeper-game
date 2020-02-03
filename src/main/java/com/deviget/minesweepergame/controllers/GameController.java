@@ -73,4 +73,9 @@ public class GameController {
 		return new ResponseEntity<>(newGame, HttpStatus.OK);
 	}
 
+	@GetMapping("/ping")
+	public ResponseEntity<String> ping() {
+		return new ResponseEntity<>("It's working :)", HttpStatus.OK);
+	}
+
 }
